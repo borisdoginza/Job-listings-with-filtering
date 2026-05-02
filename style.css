@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* #jobs > div {
+  transition: all 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+} */
+
+@theme {
+  --color-green-900: hsl(180, 14%, 20%);
+  --color-green-400: hsl(180, 29%, 50%);
+  --color-green-50:  hsl(180, 52%, 96%);
+  --color-gray-400:  hsl(180, 8%, 52%);
+  --color-gray-300:  hsl(180, 10%, 74%);
+
+  --shadow-xl: 0 4px 42px hsla(180, 29%, 50%, 0.3);;
+}
+
+.bg-header {
+  background-image: url('./images/bg-header-mobile.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.root{
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  
+}
+
+@media (min-width: 768px){
+  .bg-header{
+    background-image: url('./images/bg-header-desktop.svg');
+  }
+}
