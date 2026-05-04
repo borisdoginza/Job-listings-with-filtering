@@ -1,9 +1,9 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const n of document.querySelectorAll('link[rel="modulepreload"]'))o(n);new MutationObserver(n=>{for(const l of n)if(l.type==="childList")for(const a of l.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&o(a)}).observe(document,{childList:!0,subtree:!0});function s(n){const l={};return n.integrity&&(l.integrity=n.integrity),n.referrerPolicy&&(l.referrerPolicy=n.referrerPolicy),n.crossOrigin==="use-credentials"?l.credentials="include":n.crossOrigin==="anonymous"?l.credentials="omit":l.credentials="same-origin",l}function o(n){if(n.ep)return;n.ep=!0;const l=s(n);fetch(n.href,l)}})();let i=[],r=[];async function c(){i=await(await fetch("./data.json")).json(),console.log(i),g()}function g(){const e=document.getElementById("jobs");e.innerHTML=d().map(t=>p(t)).join(""),u()}function d(){return r.length===0?i:i.filter(e=>{const t=[e.role,e.level,...e.languages,...e.tools];return r.every(s=>t.includes(s))})}function u(){const e=document.getElementById("jobsActiveFilters"),t=document.getElementById("jobs"),s=document.querySelector(".filters");if(r.length===0){e.style.opacity="0",t.style.marginTop="0";return}e.style.opacity="1",s.innerHTML=`
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const n of document.querySelectorAll('link[rel="modulepreload"]'))o(n);new MutationObserver(n=>{for(const l of n)if(l.type==="childList")for(const a of l.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&o(a)}).observe(document,{childList:!0,subtree:!0});function s(n){const l={};return n.integrity&&(l.integrity=n.integrity),n.referrerPolicy&&(l.referrerPolicy=n.referrerPolicy),n.crossOrigin==="use-credentials"?l.credentials="include":n.crossOrigin==="anonymous"?l.credentials="omit":l.credentials="same-origin",l}function o(n){if(n.ep)return;n.ep=!0;const l=s(n);fetch(n.href,l)}})();let i=[],r=[];async function g(){i=await(await fetch("./data.json")).json(),console.log(i),c()}function c(){const e=document.getElementById("jobs");e.innerHTML=d().map(t=>p(t)).join(""),u()}function d(){return r.length===0?i:i.filter(e=>{const t=[e.role,e.level,...e.languages,...e.tools];return r.every(s=>t.includes(s))})}function u(){const e=document.getElementById("jobsActiveFilters"),t=document.getElementById("jobs"),s=document.querySelector(".filters");if(r.length===0){e.style.opacity="0",t.style.marginTop="0",e.style.pointerEvents="none";return}e.style.opacity="1",e.style.pointerEvents="auto",s.innerHTML=`
         ${r.map(o=>`
             <div class=" flex flex-row bg-green-50 rounded-lg">
-                <span class=" text-green-400 px-4 py-1 rounded-full font-bold">${o}</span>
-                <div class="w-8 h-8 bg-green-400 hover:bg-black transition-all duration-100 ease-in-out rounded-r-lg flex items-center justify-center">
-                    <button onclick="toggleFilter('${o}')" class="text-green-50 text-[24px]">
+                <span class=" select-none text-green-400 px-4 py-1 rounded-full font-bold">${o}</span>
+                <div onclick="toggleFilter('${o}')" class=" cursor-pointer w-8 h-8 bg-green-400 hover:bg-black transition-all duration-100 ease-in-out rounded-r-lg flex items-center justify-center">
+                    <button  class="text-green-50 text-[24px]">
                     
                     <svg width="18" height="18" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11 2.697L2.698 4.11 6.586 8l-3.89 3.89 1.415 1.413L8 9.414l3.89 3.89 1.413-1.415L9.414 8l3.89-3.89-1.415-1.413L8 6.586l-3.89-3.89z" fill="#FFF"></path>
@@ -11,7 +11,7 @@
                 </div>
             </div>
             `).join("")}
-    `,requestAnimationFrame(()=>{const o=e.offsetHeight;t.style.marginTop=o+"px"})}window.toggleFilter=function(e){r.includes(e)?r=r.filter(t=>t!==e):r.push(e),g()};window.clearFilters=function(){r=[],g()};function p(e){return`
+    `,requestAnimationFrame(()=>{const o=e.offsetHeight;t.style.marginTop=o+"px"})}window.toggleFilter=function(e){r.includes(e)?r=r.filter(t=>t!==e):r.push(e),c()};window.clearFilters=function(){r=[],c()};function p(e){return`
         <div class="bg-white rounded-lg shadow-xl transition-all duration-200 ease-in-out flex flex-col h-64.75 lg:h-38 lg:items-center lg:flex-row lg:w-full lg:justify-between lg:pt-0  relative px-4 pt-10 justify-items-start gap-2 md:pb-3 lg:pb-0 w-[clamp(336px,100%,360px)] ${e.featured?"border-l-6 border-green-400":""}"
         >
         <img src="${e.logo}" alt="${e.company}" class="transition-all duration-200 w-12 h-12 -top-5.75 rounded-full absolute left-[-16] lg:top-8 lg:left-6 lg:w-22 lg:h-22">
@@ -38,22 +38,22 @@
             <div class="flex gap-2 flex-wrap lg:flex-row lg:h-10">
                 <span onclick="toggleFilter('${e.role}')" class="
                 ${r.includes(e.role)?"bg-green-400 text-green-50 hover:bg-green-400/80 hover:text-green-50":"text-green-400 bg-green-50 hover:bg-green-400 hover:text-green-50"}
-                 font-bold  px-4 py-2 rounded  transition-all duration-100 cursor-pointer">${e.role}</span>
+                 font-bold select-none px-4 py-2 rounded  transition-all duration-100 cursor-pointer">${e.role}</span>
                 <span onclick="toggleFilter('${e.level}')" class="
                 ${r.includes(e.level)?"bg-green-400 text-green-50 hover:bg-green-400/80 hover:text-green-50":"text-green-400 bg-green-50 hover:bg-green-400 hover:text-green-50"}
 
-                 font-bold  px-4 py-2 rounded  transition-all duration-100 cursor-pointer">${e.level}</span>
+                 font-bold select-none px-4 py-2 rounded  transition-all duration-100 cursor-pointer">${e.level}</span>
                 ${e.languages.map(t=>`
                     <span onclick="toggleFilter('${t}')" class="
                     ${r.includes(t)?"bg-green-400 text-green-50 hover:bg-green-400/80 hover:text-green-50":"text-green-400 bg-green-50 hover:bg-green-400 hover:text-green-50"}
-                     font-bold  px-4 py-2 rounded transition-all duration-100 cursor-pointer">${t}</span>
+                     font-bold select-none px-4 py-2 rounded transition-all duration-100 cursor-pointer">${t}</span>
                     `).join("")}
                 ${e.tools.map(t=>`
                     <span onclick="toggleFilter('${t}')" class="
                     ${r.includes(t)?"bg-green-400 text-green-50 hover:bg-green-400/80 hover:text-green-50":"text-green-400 bg-green-50 hover:bg-green-400 hover:text-green-50"}
-                    font-bold  px-4 py-2 rounded transition-all duration-100 cursor-pointer">${t}</span>
+                    font-bold select-none px-4 py-2 rounded transition-all duration-100 cursor-pointer">${t}</span>
                     `).join("")}
                 
             </div>
         </div>            
-    `}const f=document.querySelector(".clearButton");f.addEventListener("click",clearFilters);c();
+    `}const f=document.querySelector(".clearButton");f.addEventListener("click",clearFilters);g();
